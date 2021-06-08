@@ -1,3 +1,4 @@
+import numpy as np
 import sounddevice as sd
 import speech_recognition as sr
 
@@ -10,7 +11,9 @@ def record(soundpath):
 
     myrecording = sd.rec(int(seconds * fs), samplerate = fs, channels = 1)
     sd.wait() # wait until the recording is done
-    write(soundpath,fs, myrecording)
+    processed_recording = (np.iinfo(np.int32).max *
+                           (myrecording / np.abs(myrecording).max())).astype(np.int32)
+    write(soundpath,fs, processed_recording)
 
 def convertSpeech(soundpath):
     r = sr.Recognizer()
@@ -23,14 +26,14 @@ def convertSpeech(soundpath):
         text = r.recognize_google(audio_text)
         print('Converting audio transcripts into text ...')
         print(text)
-
     except:
         print('Sorry.. run again...')
+
 
 # main method
 if __name__ == '__main__':
 
-    soundpath = 'output.mp3'
+    soundpath = 'output.wav'
     record(soundpath)
     convertSpeech(soundpath)
 
