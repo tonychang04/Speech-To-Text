@@ -82,6 +82,7 @@ def record_asynch(soundpath):
                         raise KeyboardInterrupt
     except KeyboardInterrupt:
         print('\nRecording finished: ' + repr(args.filename))
+        convertSpeech(soundpath)
         parser.exit(0)
     except Exception as e:
         parser.exit(type(e).__name__ + ': ' + str(e))
@@ -114,11 +115,11 @@ def convertSpeech(soundpath):
         print('Sorry.. run again...')
 
 
-# main method
+# main methodr
 if __name__ == '__main__':
 
     soundpath = 'output.wav'
     record_asynch(soundpath)
     # record(soundpath)
-    convertSpeech(soundpath)
+    
     print("wewe")
