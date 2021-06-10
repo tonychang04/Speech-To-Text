@@ -1,8 +1,6 @@
 import numpy as np
-import sounddevice as sd
 import speech_recognition as sr
 import argparse
-import tempfile
 import queue
 import sys
 import keyboard
@@ -10,6 +8,7 @@ import sounddevice as sd
 import soundfile as sf
 import os
 
+from googletrans import Translator
 from scipy.io.wavfile import write
 
 
@@ -22,6 +21,10 @@ def int_or_str(text):
 
 # referenced https://python-sounddevice.readthedocs.io/en/0.4.1/examples.html#recording-with-arbitrary-duration
 def record_asynch(soundpath):
+    """
+    A method used to record the speech, will be terminated once user pressed r
+    :param soundpath: the path of sound to be saved
+    """
     if os.path.isfile(soundpath):
         os.remove(soundpath)
 
@@ -109,7 +112,7 @@ def convertSpeech(soundpath):
         # using google speech recognition
         text = r.recognize_google(audio_text)
         print('Converting audio transcripts into text ...')
-        print(text)
+        #print(text)
         sys.stdout.write(text)
     except:
         print('Sorry.. run again...')
@@ -119,7 +122,13 @@ def convertSpeech(soundpath):
 if __name__ == '__main__':
 
     soundpath = 'output.wav'
-    record_asynch(soundpath)
+    #record_asynch(soundpath)
+    translator = Translator()
+    print(translator)
+    output = translator.translate("is this translation accurate?", dest= "ko")
+    print(output.text, output.extra_data)
+    #print(translator.translate("roses", dest='zh-cn'))
+    #print(translation)
     # record(soundpath)
     
     print("wewe")
