@@ -11,6 +11,10 @@ import os
 from googletrans import Translator
 from scipy.io.wavfile import write
 
+def translate(speech):
+    translator = Translator()
+    word = translator.translate(speech, dest='zh-cn')
+    print(word.text)
 
 def int_or_str(text):
     """Helper function for argument parsing."""
@@ -85,7 +89,9 @@ def record_asynch(soundpath):
                         raise KeyboardInterrupt
     except KeyboardInterrupt:
         print('\nRecording finished: ' + repr(args.filename))
-        convertSpeech(soundpath)
+
+        speech = convertSpeech(soundpath)
+        translate(speech)
         parser.exit(0)
     except Exception as e:
         parser.exit(type(e).__name__ + ': ' + str(e))
@@ -114,6 +120,7 @@ def convertSpeech(soundpath):
         print('Converting audio transcripts into text ...')
         #print(text)
         sys.stdout.write(text)
+        return text
     except:
         print('Sorry.. run again...')
 
@@ -122,13 +129,13 @@ def convertSpeech(soundpath):
 if __name__ == '__main__':
 
     soundpath = 'output.wav'
-    #record_asynch(soundpath)
     translator = Translator()
     print(translator)
-    output = translator.translate("is this translation accurate?", dest= "ko")
-    print(output.text, output.extra_data)
+    record_asynch(soundpath)
+    #output = translator.translate("is this translation accurate?", dest= "ko")
+    #print(output.text, output.extra_data)
     #print(translator.translate("roses", dest='zh-cn'))
     #print(translation)
-    # record(soundpath)
+    #record(soundpath)
     
     print("wewe")
