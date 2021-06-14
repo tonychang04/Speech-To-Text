@@ -4,12 +4,18 @@ import argparse
 import queue
 import sys
 import keyboard
+import kivy
 import sounddevice as sd
 import soundfile as sf
 import os
 
 from googletrans import Translator
+from kivy.app import App
+from kivy.uix.label import Label
 from scipy.io.wavfile import write
+
+from speechApp import SpeechApp
+
 
 def translate(speech):
     translator = Translator()
@@ -127,11 +133,12 @@ def convertSpeech(soundpath):
 
 # main methodr
 if __name__ == '__main__':
-
-    soundpath = 'output.wav'
-    translator = Translator()
-    print(translator)
-    record_asynch(soundpath)
+    speechApp = SpeechApp()
+    speechApp.run()
+    #soundpath = 'output.wav'
+    #translator = Translator()
+    #print(translator)
+    #record_asynch(soundpath)
     #output = translator.translate("is this translation accurate?", dest= "ko")
     #print(output.text, output.extra_data)
     #print(translator.translate("roses", dest='zh-cn'))
