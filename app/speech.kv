@@ -6,9 +6,12 @@
         size: root.width, root.height
 
         Label:
+            id: text_label
             font_name: 'STHeiti Medium.ttc'
             text: "Text: " + "\n" + "Translated Text: "
 
         Button:
-            text: "Submit: "
+            id: recorder
+            text: "Record: "
+            on_press: root.button_record_translate()
 

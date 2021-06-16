@@ -23,113 +23,37 @@ from kivy.uix.textinput import TextInput
 from functools import partial
 
 class MyGrid(Widget):
-   # text = ObjectProperty(None)
-   # translated_text = ObjectProperty(None)
+    def button_record_translate(self):
+        """
+        Record and translate the given text.
+        :return:
+        """
+        recorded_text, translated_text = record_translate('output.wav')
+        if (recorded_text == None or translated_text == None):
+            self.ids.text_label.text = 'Error in recording'
+            return
+        self.ids.text_label.text = 'Message: ' + recorded_text + '\n' + 'Translation: ' + translated_text
 
-    pass
 
-
-    def process_translate(self, instance):
-        recorded_text, translated_text = record('output.wav')
-        self.text = 'Message: ' + recorded_text + '\n' + 'Translation: ' + translated_text
-'''
 def translate(speech):
+    """
+    Translate the given speech
+    :param speech: the string text being given
+    :return: the returned string changed based on the language
+    """
     translator = Translator()
     word = translator.translate(speech, dest='zh-cn')
     print(word.text)
     return word.text
 
-def int_or_str(text):
-    """Helper function for argument parsing."""
-    try:
-        return int(text)
-    except ValueError:
-        return text
-
-# referenced https://python-sounddevice.readthedocs.io/en/0.4.1/examples.html#recording-with-arbitrary-duration
-def record_asynch(soundpath):
+def record_translate(soundpath):
     """
-    A method used to record the speech, will be terminated once user pressed r
-    :param soundpath: the path of sound to be saved
+    Record the audio and save locally
+    :param soundpath: the path you want to save to the file
+    :return:
     """
-    if os.path.isfile(soundpath):
-        os.remove(soundpath)
-
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument(
-        '-l', '--list-devices', action='store_true',
-        help='show list of audio devices and exit')
-    args, remaining = parser.parse_known_args()
-    if args.list_devices:
-        print(sd.query_devices())
-        parser.exit(0)
-    parser = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        parents=[parser])
-    parser.add_argument(
-        'filename', nargs='?', metavar='FILENAME',
-        help='audio file to store recording to')
-    parser.add_argument(
-        '-d', '--device', type=int_or_str,
-        help='input device (numeric ID or substring)')
-    parser.add_argument(
-        '-r', '--samplerate', type=int, help='sampling rate')
-    parser.add_argument(
-        '-c', '--channels', type=int, default=1, help='number of input channels')
-    parser.add_argument(
-        '-t', '--subtype', type=str, help='sound file subtype (e.g. "PCM_24")')
-    args = parser.parse_args(remaining)
-
-    q = queue.Queue()
-
-    def callback(indata, frames, time, status):
-        """This is called (from a separate thread) for each audio block."""
-        if status:
-            print(status, file=sys.stderr)
-        q.put(indata.copy())
-
-    try:
-        if args.samplerate is None:
-            device_info = sd.query_devices(args.device, 'input')
-            # soundfile expects an int, sounddevice provides a float:
-            args.samplerate = int(device_info['default_samplerate'])
-
-        args.filename = soundpath
-
-        # Make sure the file is opened before recording anything:
-        with sf.SoundFile(args.filename, mode='x', samplerate=args.samplerate,
-                          channels=args.channels, subtype=args.subtype) as file:
-            with sd.InputStream(samplerate=args.samplerate, device=args.device,
-                                channels=args.channels, callback=callback):
-                print('#' * 80)
-                print('press Ctrl+C to stop the recording')
-                print('#' * 80)
-
-
-                while True:
-                    
-                    file.write(q.get())
-                    # focus on here since it's where keyboard entered
-                    if keyboard.is_pressed("r"):
-                        raise KeyboardInterrupt
-
-    except KeyboardInterrupt:
-        print('\nRecording finished: ' + repr(args.filename))
-
-        speech = convertSpeech(soundpath)
-        translate(speech)
-        parser.exit(0)
-    except Exception as e:
-        parser.exit(type(e).__name__ + ': ' + str(e))
-
-
-
-
-def record(soundpath):
     fs = 44100  # free-air resonant frequency
-    seconds = 5  # first use prefixed time
-
+    seconds = 10  # Changed the prefixed time
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
     sd.wait()  # wait until the recording is done
     processed_recording = (np.iinfo(np.int32).max *
@@ -141,6 +65,11 @@ def record(soundpath):
 
 
 def convertSpeech(soundpath):
+    """
+    Convert the given speech to text.
+    :param soundpath: the soundpath that the audio belongs to
+    :return: the string of text based on the speech
+    """
     r = sr.Recognizer()
     with sr.AudioFile(soundpath) as source:
         audio_text = r.listen(source)
@@ -155,4 +84,3 @@ def convertSpeech(soundpath):
         return text
     except:
         print('Sorry.. run again...')
-'''
