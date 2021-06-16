@@ -1,6 +1,6 @@
 # Speech-To-Text
 
-##Demo
+##**Demo**
 
 [![Nice](https://img.youtube.com/vi/6ggAcNcVgtU/0.jpg)](https://www.youtube.com/watch?v=6ggAcNcVgtU)
 Click the picture to get the video demo
@@ -50,6 +50,8 @@ pip3 install -r requirement.txt
 ## **Contact**
 For any bugs and advices, contact me at
 **yaowenc2@illinois.edu**.
+
+Special thanks to [Terry Kim](https://github.com/terrykim1211) for debugging some bugs for this project
 
 ## **Licence**
 Released under the [MIT License](https://github.com/jonschlinkert/update-copyright/blob/master/LICENSE).
