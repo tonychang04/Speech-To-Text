@@ -1,5 +1,6 @@
 # Speech-To-Text
 
+![Demo](demo.mp4)
 
 This is a project that allows user to record their speech, and then it 
 automatically converts it to text, then translate the text to the given language.
