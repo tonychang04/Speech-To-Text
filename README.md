@@ -1,14 +1,26 @@
 # Speech-To-Text
 
-![Demo](demo.mp4)
+##Demo
+[![Nice](https://img.youtube.com/vi/6ggAcNcVgtU/0.jpg)](https://www.youtube.com/watch?v=6ggAcNcVgtU)
+Click the picture to get the video demo
+
 
 This is a project that allows user to record their speech, and then it 
 automatically converts it to text, then translate the text to the given language.
 I created this project because coming from a family that doesn't speak english, my family often doesn't 
 communicate well with people speaking english. I created this app in hope to assist their transition
-of using english to comminicate. Although this app is definitely not perfect, but I learned a lot of
+of using english to communicate. Although this app is definitely not perfect, but I learned a lot of
 libraries related to speech-to-text. Also, I utilized Kivy framework to create an app, which is really fun 
 in the process too.
+
+## How to use
+Simply run the main method and then press the button called record then start speaking
+If you don't want to run the app run the method 
+```console
+if __name__ == 'other':
+```
+and start speaking. Press the keyboard letter 'r' when you are done speaking.
+
 
 ## **Dependencies**
 * Google Trans
@@ -29,6 +41,7 @@ pip3 install -r requirement.txt
 
 
 ## **Future Possible Functionalities**
+* Add a timer so the user know when the recording will end
 * Create a better UI 
 * Allow custom duration of recording instead of constant recording
 
