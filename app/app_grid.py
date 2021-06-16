@@ -1,26 +1,12 @@
-import numpy as np
-import speech_recognition as sr
-import argparse
-import queue
 import sys
-import keyboard
-import sounddevice as sd
-import soundfile as sf
-import os
 
+import numpy as np
+import sounddevice as sd
+import speech_recognition as sr
 from googletrans import Translator
-from kivy.properties import ObjectProperty
 from kivy.uix.widget import Widget
 from scipy.io.wavfile import write
 
-import keyboard
-import kivy
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from functools import partial
 
 class MyGrid(Widget):
     def button_record_translate(self):

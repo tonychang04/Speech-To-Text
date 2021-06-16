@@ -106,20 +106,6 @@ def record_asynch(soundpath):
         parser.exit(type(e).__name__ + ': ' + str(e))
 
 
-def record(soundpath):
-    fs = 44100  # free-air resonant frequency
-    seconds = 5  # first use prefixed time
-
-    myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
-    sd.wait()  # wait until the recording is done
-    processed_recording = (np.iinfo(np.int32).max *
-                           (myrecording / np.abs(myrecording).max())).astype(np.int32)
-    write(soundpath, fs, processed_recording)
-    text = convertSpeech(soundpath)
-    translated_text = translate(text)
-    return text, translated_text
-
-
 def convertSpeech(soundpath):
     r = sr.Recognizer()
     with sr.AudioFile(soundpath) as source:
@@ -140,15 +126,7 @@ def convertSpeech(soundpath):
 if __name__ == '__main__':
     speechApp = SpeechApp()
     speechApp.run()
-    #soundpath = 'output.wav'
-    #translator = Translator()
-    #print(translator)
-    #record_asynch(soundpath)
-    #output = translator.translate("is this translation accurate?", dest= "ko")
-    #print(output.text, output.extra_data)
-    #print(translator.translate("roses", dest='zh-cn'))
-    #print(translation)
-    #record(soundpath)
+
 
 # start the program without app by calling this method
 if __name__ == 'other':
