@@ -16,7 +16,8 @@ libraries related to speech-to-text. Also, I utilized Kivy framework to create a
 in the process too.
 
 ## How to use
-Simply run the main method and then press the button called record then start speaking
+Simply run the main method and then press the button called record then start speaking.
+
 If you don't want to run the app run the method 
 ```console
 if __name__ == 'other':
