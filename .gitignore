@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# User produced data
+*.wav
+
+# VS Code workspace settings
+.*vscode
+*.code-workspace
