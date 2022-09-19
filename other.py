@@ -1,4 +1,3 @@
-import numpy as np
 import speech_recognition as sr
 import argparse
 import queue
@@ -9,9 +8,6 @@ import soundfile as sf
 import os
 
 from googletrans import Translator
-from scipy.io.wavfile import write
-
-from app.speech_app import SpeechApp
 
 
 def translate(speech):
@@ -122,14 +118,9 @@ def convertSpeech(soundpath):
     except:
         print('Sorry.. run again...')
 
-#start the app by calling this method
+
+# Start the program without app if run by "other" way
 if __name__ == '__main__':
-    speechApp = SpeechApp()
-    speechApp.run()
-
-
-# start the program without app by calling this method
-if __name__ == 'other':
     soundpath = 'output.wav'
     # press r to stop the recording
     record_asynch(soundpath)
