@@ -15,9 +15,15 @@ of using english to communicate. Although this app is definitely not perfect, bu
 libraries related to speech-to-text. Also, I utilized Kivy framework to create an app, which is really fun 
 in the process too.
 
-## How to use
-Simply run the main method and then press the button called record then start speaking.
+## Usage
 
+To run the program:
+```
+python main.py
+```
+Then press the button called record then start speaking.
+
+<!-- I don't know how you would do this. See my other PR -->
 If you don't want to run the app run the method 
 ```console
 if __name__ == 'other':
@@ -38,7 +44,7 @@ and start speaking. Press the keyboard letter 'r' when you are done speaking.
 After you cloned the respository, you use command line to reach your 
 directory of this project and then type
 ```console
-pip3 install -r requirement.txt
+pip3 install -r requirements.txt
 ```
 
 
